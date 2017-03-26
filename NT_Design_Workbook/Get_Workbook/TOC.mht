@@ -1,0 +1,2170 @@
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml"
+xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:w=3D"urn:schemas-microsoft-com:office:word"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dus-ascii">
+<meta name=3DProgId content=3DWord.Document>
+<meta name=3DGenerator content=3D"Microsoft Word 11">
+<meta name=3DOriginator content=3D"Microsoft Word 11">
+<link rel=3DFile-List href=3D"TOC_files/filelist.xml">
+<title>NT OS/2 Design Workbook: Core OS</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Dave Probert</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Serge Lidin</o:LastAuthor>
+  <o:Revision>9</o:Revision>
+  <o:TotalTime>2400</o:TotalTime>
+  <o:Created>2006-06-18T03:08:00Z</o:Created>
+  <o:LastSaved>2009-06-09T22:28:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1308</o:Words>
+  <o:Characters>7456</o:Characters>
+  <o:Company>Microsoft Corporation</o:Company>
+  <o:Lines>62</o:Lines>
+  <o:Paragraphs>17</o:Paragraphs>
+  <o:CharactersWithSpaces>8747</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:SelectEntireFieldWithStartOrEnd/>
+   <w:UseWord2002TableStyleRules/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState=3D"false" LatentStyleCount=3D"156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-1610611985 1073750139 0 0 159 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 14.0in;
+	margin:1.0in 1.25in 1.0in 81.0pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+table.MsoTableGrid
+	{mso-style-name:"Table Grid";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"9218"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=3DEN-US link=3Dblue vlink=3Dpurple style=3D'tab-interval:.5in'>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><span style=3D'font-family:Calibri'>These are some of =
+the
+primary specs/docs from the early days of NT, and continue to give insight =
+into
+the fundamental kernel design decisions.<o:p></o:p></span></p>
+
+<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
+
+<table class=3DMsoTableGrid border=3D1 cellspacing=3D0 cellpadding=3D0 alig=
+n=3Dleft
+ width=3D599 style=3D'width:449.6pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-table-overlap:never;mso-yfti-tbll=
+ook:
+ 480;mso-table-lspace:9.0pt;margin-left:6.75pt;mso-table-rspace:9.0pt;
+ margin-right:6.75pt;mso-table-anchor-vertical:paragraph;mso-table-anchor-h=
+orizontal:
+ column;mso-table-left:3.55pt;mso-table-top:.05pt;mso-padding-alt:0in 5.4pt=
+ 0in 5.4pt;
+ mso-border-insideh:.5pt solid windowtext;mso-border-insidev:.5pt solid win=
+dowtext'>
+ <tr style=3D'mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=3D599 colspan=3D3 style=3D'width:449.6pt;border:solid windowtex=
+t 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;mso-elemen=
+t:frame;
+  mso-element-frame-hspace:9.0pt;mso-element-wrap:around;mso-element-anchor=
+-vertical:
+  paragraph;mso-element-anchor-horizontal:column;mso-element-left:.05in;
+  mso-element-top:.05pt;mso-height-rule:exactly'><b style=3D'mso-bidi-font-=
+weight:
+  normal'><span style=3D'font-size:14.0pt;mso-bidi-font-size:12.0pt;font-fa=
+mily:
+  Calibri;color:blue'>NT OS/2 Design Workbook:<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>Core OS</span></b><b style=3D'ms=
+o-bidi-font-weight:
+  normal'><span style=3D'font-family:Calibri'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:1'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><b
+  style=3D'mso-bidi-font-weight:normal'><span style=3D'font-family:Calibri'=
+>File<o:p></o:p></span></b></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><b
+  style=3D'mso-bidi-font-weight:normal'><span style=3D'font-family:Calibri'=
+>Title<o:p></o:p></span></b></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><b
+  style=3D'mso-bidi-font-weight:normal'><span style=3D'font-family:Calibri'=
+>Author(s)<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:2'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"dwintro.doc">dwintro</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Design Workbook Introduction<o:p></=
+o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Lou Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:3'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"ke.doc">ke</a><o:p></o:p></=
+span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Kernel Specification<o:p></o:p></sp=
+an></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler,<o:p></o:p></span></p>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Bryan M. Willman<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:4'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"alerts.doc">alerts</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Alerts Design Note<o:p></o:p></span=
+></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:5'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"apc.doc">apc</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 APC Design Note<o:p></o:p></span></=
+p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:6'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"ob.doc">ob</a><o:p></o:p></=
+span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Object Management Specification<o:p=
+></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Steven R. Wood<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:7'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"proc.doc">proc</a><o:p></o:=
+p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Process Structure<o:p></o:p></span>=
+</p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark Lucovsky<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:8'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"suspend.doc">suspend</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Suspend/Resume Design Note<o:p></o:=
+p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:9'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"attproc.doc">attproc</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Attach Process Design Note<o:p></o:=
+p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:10'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"vm.doc">vm</a><o:p></o:p></=
+span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Virtual Memory Specification<o:p></=
+o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Lou Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:11'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"vmdesign.doc">vmdesign</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Memory Management Design Note<o:p><=
+/o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Lou Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:12'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"io.doc">io</a><o:p></o:p></=
+span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 I/O System Specification<o:p></o:p>=
+</span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Darryl E. Havens<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:13'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"irp.doc">irp</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 IRP Language Definition<o:p></o:p><=
+/span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:14'>
+  <td valign=3Dtop style=3D'border:solid windowtext 1.0pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext =
+.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"namepipe.doc">namepipe</a><=
+o:p></o:p></span></p>
+  </td>
+  <td valign=3Dtop style=3D'border-top:none;border-left:none;border-bottom:=
+solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Named Pipe Specification<o:p></o:p>=
+</span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David Cutler &amp; Gary Kimura<o:p></o:p></=
+span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:15'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"mailslot.doc">mailslot</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Mailslot Specification<o:p></o:p></=
+span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Manny Weiser<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:16'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"rsm.doc">rsm</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Windows NT Session Management and Control<o=
+:p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark Lucovsky<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:17'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"fsdesign.doc">fsdesign</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 File System Design Note<o:p></o:p><=
+/span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:18'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"fsrtl.doc">fsrtl</a><o:p></=
+o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 File System Support Routines
+  Specification<o:p></o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:19'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"sem.doc">sem</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Event - Semaphore Specification<o:p=
+></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'margin-right:-6.75pt;mso-element:frame;mso-=
+element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:paragraph;
+  mso-element-anchor-horizontal:column;mso-element-left:.05in;mso-element-t=
+op:
+  .05pt;mso-height-rule:exactly'><span style=3D'font-family:Calibri'>Lou
+  Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:20'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"argument.doc">argument</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Argument Validation Specification<o=
+:p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:21'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"timer.doc">timer</a><o:p></=
+o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Timer Specification<o:p></o:p></spa=
+n></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:22'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"coding.doc">coding</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Coding Conventions<o:p></o:p></span=
+></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark Lucovsky,<o:p></o:p></span></p>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Helen Custer<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:23'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"ulibcode.doc">ulibcode</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT Utilities Coding Conventions<o:p></o:p><=
+/span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David J. Gilman<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:24'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"exceptn.doc">exceptn</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Exception Handling Specification<o:=
+p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:25'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"os2.doc">os2</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>OS/2 Emulation Subsystem Specification<o:p>=
+</o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Steven R. Wood<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:26'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"status.doc">status</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Status Code Specification<o:p></o:p=
+></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Darryl E. Havens<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:27'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"ntdesrtl.doc">ntdesrtl</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Subsystem Design Rational<o:p></o:p=
+></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark H. Lucovsky<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:28'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"resource.doc">resource</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Shared Resource Specification<o:p><=
+/o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:29'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"execsupp.doc">execsupp</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Executive Support Routines Specific=
+ation<o:p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David Treadwell<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:30'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"support.doc">support</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Interlocked Support Routines
+  Specification<o:p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:31'>
+  <td valign=3Dtop style=3D'border:solid windowtext 1.0pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext =
+.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"dd.doc">dd</a><o:p></o:p></=
+span></p>
+  </td>
+  <td valign=3Dtop style=3D'border-top:none;border-left:none;border-bottom:=
+solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Windows NT Driver Model Specification<o:p><=
+/o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Darryl E. Havens<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:32'>
+  <td valign=3Dtop style=3D'border:solid windowtext 1.0pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext =
+.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"oplock.doc">oplock</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td valign=3Dtop style=3D'border-top:none;border-left:none;border-bottom:=
+solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Opportunistic Locking Design Note<o=
+:p></o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Darryl Havens, et al<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:33'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"memio.doc">memio</a><o:p></=
+o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Memory Management Guide for I/O<o:p=
+></o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Lou Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:34'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"time.doc">time</a><o:p></o:=
+p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Time Conversion Specification<o:p><=
+/o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:35'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"mutant.doc">mutant</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Mutant Specification<o:p></o:p></sp=
+an></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:36'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"prefix.doc">prefix</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Prefix Table Specification<o:p></o:=
+p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Gary D. Kimura<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:37'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"startup.doc">startup</a><o:=
+p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 System Startup Design Note<o:p></o:=
+p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark Lucovsky<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:38'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"dbg.doc">dbg</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Debug Architecture<o:p></o:p></span=
+></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Mark Lucovsky<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:39'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"coff.doc">coff</a><o:p></o:=
+p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Linker/Librarian/Image Format Spec<=
+u><span
+  style=3D'color:blue'><o:p></o:p></span></u></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Michael J. O'Leary<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:40'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"cache.doc">cache</a><o:p></=
+o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Caching Design Note<o:p></o:p></spa=
+n></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Tom Miller<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:41'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"lpc.doc">lpc</a><o:p></o:p>=
+</span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Local Inter-Process Communication (=
+LPC)
+  Specification<o:p></o:p></span></p>
+  </td>
+  <td width=3D151 style=3D'width:113.15pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Steven R. Wood<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:42'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"implan.doc">implan</a><o:p>=
+</o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS/2 Product Description and Implementat=
+ion
+  Plan<o:p></o:p></span></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>David N. Cutler<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=3D'mso-yfti-irow:43;mso-yfti-lastrow:yes'>
+  <td style=3D'border:solid windowtext 1.0pt;border-top:none;mso-border-top=
+-alt:
+  solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;padding:0in 5.=
+4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'><a
+  href=3D"basecont.doc">basecont</a><=
+o:p></o:p></span></p>
+  </td>
+  <td style=3D'border-top:none;border-left:none;border-bottom:solid windowt=
+ext 1.0pt;
+  border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .=
+5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext=
+ .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>NT OS Base Product Contents<o:p></o:p></spa=
+n></p>
+  </td>
+  <td width=3D151 valign=3Dtop style=3D'width:113.15pt;border-top:none;bord=
+er-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1=
+.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid window=
+text .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=3DMsoNormal style=3D'mso-element:frame;mso-element-frame-hspace:=
+9.0pt;
+  mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element=
+-anchor-horizontal:
+  column;mso-element-left:.05in;mso-element-top:.05pt;mso-height-rule:exact=
+ly'><span
+  style=3D'font-family:Calibri'>Lou Perazzoli<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=3DMsoNormal><span style=3D'font-family:Calibri'><o:p>&nbsp;</o:p><=
+/span></p>
+
+</div>
+
+</body>
+
+</html>

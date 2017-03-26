@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowsResearchKernel", "WRK.vcproj", "{7B312FB7-F0A3-41FE-89D1-6100FDC35009}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		amd64|Win32 = amd64|Win32
+		x86|Win32 = x86|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B312FB7-F0A3-41FE-89D1-6100FDC35009}.amd64|Win32.ActiveCfg = amd64|Win32
+		{7B312FB7-F0A3-41FE-89D1-6100FDC35009}.amd64|Win32.Build.0 = amd64|Win32
+		{7B312FB7-F0A3-41FE-89D1-6100FDC35009}.x86|Win32.ActiveCfg = x86|Win32
+		{7B312FB7-F0A3-41FE-89D1-6100FDC35009}.x86|Win32.Build.0 = x86|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
